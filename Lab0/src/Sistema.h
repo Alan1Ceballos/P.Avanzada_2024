@@ -1,10 +1,3 @@
-/*
- * Sistema.h
- *
- *  Created on: 4 abr 2024
- *      Author: UnwantedOpinion
- */
-
 #ifndef SISTEMA_H_
 #define SISTEMA_H_
 #include <iostream>
@@ -17,6 +10,7 @@ using namespace::std;
 
 void agregarJugador(string nickname, int edad, string contrasenia);
 void agregarVideojuego(string nombre, DtTipoJuego genero);
+void MostrarJugadores();
 Jugador* obtenerJugadores(int cantJugadores);
 Videojuego* obtenerVideojuegos(int cantVideojuegos);
 Partida* obtenerPartidas(string videojuego, int cantPartidas);

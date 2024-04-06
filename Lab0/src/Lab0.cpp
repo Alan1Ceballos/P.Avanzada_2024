@@ -11,35 +11,21 @@
 using namespace std;
 int main() {
 	int oper;
-	cout<<  "-----------------------------------"<<endl;
-	cout<<  "-              MENU               -"<<endl;
-	cout<<  "-        1-INICIAR CON JUGADORES  -"<<endl;
-	cout<<  "-        2-INICIAR SIN JUGADORES  -"<<endl;
-	cout<<  "-----------------------------------"<<endl;
-	cin>>oper;
-	switch(oper)
-	{
-		case 1:
-			{
-				break;
-			}
-		default:
-			{
-				cout << "Iniciando sin jugadores";
-				break;
-			}
-	};
+	agregarJugador("J1", 11, "1J");
+	agregarJugador("J2", 22, "2J");
+	agregarJugador("J3", 33, "3J");
 	do {
 		cout<< 	"------------------------------------"<<endl;
 		cout<<	"-                                 	-"<<endl;
 		cout<<  "-              MENU              	-"<<endl;
 		cout<<  "-          1-AGREGAR JUGADOR      	-"<<endl;
-		cout<<  "-          2-AGREGAR VIDEOJUEGO   	-"<<endl;
-		cout<<  "-          3-OBTENER JUGADORES    	-"<<endl;
-		cout<<  "-          4-OBTENER VIDEOJUEGOS   -"<<endl;
-		cout<<  "-          5-OBTENER PARTIDAS      -"<<endl;
-		cout<<  "-          6-INICIAR PARTIDA       -"<<endl;
-		cout<<  "-          7-SALIR                	-"<<endl;
+		cout<<  "-          2-MOSTRAR JUGADORES   	-"<<endl;
+		cout<<  "-          3-AGREGAR VIDEOJUEGO   	-"<<endl;
+		cout<<  "-          4-OBTENER JUGADORES    	-"<<endl;
+		cout<<  "-          5-OBTENER VIDEOJUEGOS   -"<<endl;
+		cout<<  "-          6-OBTENER PARTIDAS      -"<<endl;
+		cout<<  "-          7-INICIAR PARTIDA       -"<<endl;
+		cout<<  "-          8-SALIR                	-"<<endl;
 		cout<<  "-                                 	-"<<endl;
 		cout<<  "------------------------------------"<<endl;
 		cin >> oper;
@@ -59,12 +45,23 @@ int main() {
 				cout<< "OK" <<endl;
 				break;
 			}
+			case 2:{
+				MostrarJugadores();
+				break;
+			}
+			case 4:{
+				int i;
+				cout<< "Cuantos Jugadores quiere mostrar";
+				cin>> i;
+				obtenerJugadores(i);
+				break;
+			}
 		default:{
 				cout<<"Salinedo!";
 				break;
 			}
 		};
 	}
-	while(oper < 6);
+	while(oper < 7);
 	return 0;
 }
