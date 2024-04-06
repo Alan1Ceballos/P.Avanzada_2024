@@ -16,6 +16,7 @@ private:
 public:
 	DtTipoJuego(): nombre(""){};
 	DtTipoJuego(string nombre);
+	string getNombre();
 	virtual ~DtTipoJuego();
 };
 

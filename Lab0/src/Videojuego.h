@@ -19,6 +19,8 @@ public:
 	Videojuego();
 	string getNombre();
 	void setNombre(string);
+	DtTipoJuego getGenero();
+	void setGenero(DtTipoJuego);
 	virtual ~Videojuego();
 };
 

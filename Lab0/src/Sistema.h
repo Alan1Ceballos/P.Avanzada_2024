@@ -21,6 +21,8 @@ Jugador* obtenerJugadores(int cantJugadores);
 Videojuego* obtenerVideojuegos(int cantVideojuegos);
 Partida* obtenerPartidas(string videojuego, int cantPartidas);
 void iniciarPartida(string nickname, string videojuego, Partida* datos);
+void mostrarJuegos();//AUX
+void MostrarJugadores();//AUX
 
 
 #endif /* SISTEMA_H_ */

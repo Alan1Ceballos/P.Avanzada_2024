@@ -11,7 +11,10 @@
 using namespace std;
 int main() {
 	int oper;
-	cout<<  "-----------------------------------"<<endl;
+	agregarJugador("J1", 11, "1J");
+	agregarJugador("J2", 22, "2J");
+	agregarJugador("J3", 33, "3J");
+	/*cout<<  "-----------------------------------"<<endl;
 	cout<<  "-              MENU               -"<<endl;
 	cout<<  "-        1-INICIAR CON JUGADORES  -"<<endl;
 	cout<<  "-        2-INICIAR SIN JUGADORES  -"<<endl;
@@ -28,18 +31,20 @@ int main() {
 				cout << "Iniciando sin jugadores";
 				break;
 			}
-	};
+	};*/
 	do {
 		cout<< 	"------------------------------------"<<endl;
 		cout<<	"-                                 	-"<<endl;
 		cout<<  "-              MENU              	-"<<endl;
 		cout<<  "-          1-AGREGAR JUGADOR      	-"<<endl;
-		cout<<  "-          2-AGREGAR VIDEOJUEGO   	-"<<endl;
-		cout<<  "-          3-OBTENER JUGADORES    	-"<<endl;
-		cout<<  "-          4-OBTENER VIDEOJUEGOS   -"<<endl;
-		cout<<  "-          5-OBTENER PARTIDAS      -"<<endl;
-		cout<<  "-          6-INICIAR PARTIDA       -"<<endl;
-		cout<<  "-          7-SALIR                	-"<<endl;
+		cout<<  "-          2-MOSTRAR JUGADORES   	-"<<endl;
+		cout<<  "-          3-AGREGAR VIDEOJUEGO   	-"<<endl;
+		cout<<  "-          4-MOSTRAR VIDEOJUEGOS  	-"<<endl;
+		cout<<  "-          5-OBTENER JUGADORES    	-"<<endl;
+		cout<<  "-          6-OBTENER VIDEOJUEGOS   -"<<endl;
+		cout<<  "-          7-OBTENER PARTIDAS      -"<<endl;
+		cout<<  "-          8-INICIAR PARTIDA       -"<<endl;
+		cout<<  "-          9-SALIR                	-"<<endl;
 		cout<<  "-                                 	-"<<endl;
 		cout<<  "------------------------------------"<<endl;
 		cin >> oper;
@@ -50,7 +55,8 @@ int main() {
 				int edad;
 				string contrasenia;
 				cout<< "Ingrese el nickname: ";
-				cin>>nombre;
+				cin.ignore();
+				getline(cin, nombre);
 				cout<< "Ingrese la edad: ";
 				cin>>edad;
 				cout<< "Ingrese la contrasenia: ";
@@ -59,12 +65,39 @@ int main() {
 				cout<< "OK" <<endl;
 				break;
 			}
+			case 2:{
+				MostrarJugadores();
+				break;
+			}
+			case 3:{
+				string nombre;
+				string genero;
+				cout<<"Ingrese el nombre del videojuego: ";
+				cin.ignore();
+				getline(cin, nombre);
+				cout<<"Ingrese el género principal del videojuego: ";
+				getline(cin, genero);
+				agregarVideojuego(nombre, genero);
+				mostrarJuegos();
+				break;
+			}
+			case 4:{
+				mostrarJuegos();
+				break;
+			}
+			case 5:{
+				int i;
+				cout<< "Cuantos Jugadores quiere mostrar? ";
+				cin>>i;
+				obtenerJugadores(i);
+				break;
+			}
 		default:{
 				cout<<"Salinedo!";
 				break;
 			}
 		};
 	}
-	while(oper < 6);
+	while(oper < 9);
 	return 0;
 }

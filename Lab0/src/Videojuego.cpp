@@ -19,6 +19,13 @@ void Videojuego::setNombre(string newNombre){
 	this->nombre = newNombre;
 }
 
+DtTipoJuego Videojuego::getGenero(){
+	return this->genero;
+}
+void Videojuego::setGenero(DtTipoJuego newGenero){
+	this->genero = newGenero;
+}
+
 Videojuego::~Videojuego() {
 	// TODO Auto-generated destructor stub
 }
