@@ -11,9 +11,46 @@
 using namespace std;
 int main() {
 	int oper;
-	agregarJugador("J1", 11, "1J");
-	agregarJugador("J2", 22, "2J");
-	agregarJugador("J3", 33, "3J");
+	/*agregarJugador("Player1", 25, "contrasenia1");
+	agregarJugador("Player2", 22, "contrasenia2");
+	agregarJugador("Player3", 21, "contrasenia3");
+	string nombre, genero;
+	nombre = "Call of Duty";
+	genero = "Shooter";
+	agregarVideojuego(nombre, genero);
+
+	PartidaIndividual partida1;
+	DtFechaHora fechaHora1(2024, 4, 10, 15, 30);
+	partida1.setFecha(fechaHora1);
+	partida1.setDuracion(2.5);
+	partida1.setContinuaPartidaAnterior(false);
+	callOfDuty.agregarPartida(&partida1);
+
+	PartidaIndividual partida2;
+	DtFechaHora fechaHora2(2024, 4, 11, 16, 0);
+	partida2.setFecha(fechaHora2);
+	partida2.setDuracion(1.75);
+	partida2.setContinuaPartidaAnterior(true);
+	callOfDuty->agregarPartida(&partida2);
+
+	PartidaIndividual partida3;
+	DtFechaHora fechaHora3(2024, 4, 12, 18, 45);
+	partida3.setFecha(fechaHora3);
+	partida3.setDuracion(3.0);
+	partida3.setContinuaPartidaAnterior(false);
+	callOfDuty->agregarPartida(&partida3);
+
+	PartidaMultijugador partida4;
+	DtFechaHora fechaHora(2024, 4, 15, 20, 0);
+	partida4.setFecha(fechaHora);
+	partida4.setDuracion(2.0);
+	partida4.setTransmitidaEnVivo(true);
+	Jugador jugador1("Player1", 25, "contrasenia1");
+	Jugador jugador2("Player2", 28, "contrasenia2");
+	partida4.unirseaPartida(&jugador1);
+	partida4.unirseaPartida(&jugador2);
+	callOfDuty->agregarPartida(&partida4);*/
+
 	/*cout<<  "-----------------------------------"<<endl;
 	cout<<  "-              MENU               -"<<endl;
 	cout<<  "-        1-INICIAR CON JUGADORES  -"<<endl;
@@ -86,18 +123,37 @@ int main() {
 				break;
 			}
 			case 5:{
-				int i;
-				cout<< "Cuantos Jugadores quiere mostrar? ";
-				cin>>i;
+				int i = 0;
+				cout<< "Jugadores registrados en el sistema: "<<endl;
 				obtenerJugadores(i);
 				break;
 			}
+			case 8:{
+				string nickname, videojuego;
+				float duracion = 0;
+				char tipoPartida = '\0';
+				obtenerDatosP(nickname, videojuego, duracion, tipoPartida);
+				Partida* partida = crearPartida(tipoPartida);
+				partida->setDuracion(duracion);
+				configPartida(partida);
+				iniciarPartida(nickname, videojuego, partida);
+				delete partida;
+				break;
+			}
+			case 9:{
+				string i;
+				cout<< "Nombre del juego a buscar: "<<endl;
+				cin.ignore();
+				getline(cin, i);
+				mostrarPartidasVideojuego(i);
+				break;
+			}
 		default:{
-				cout<<"Salinedo!";
+				cout<<"Saliendo!";
 				break;
 			}
 		};
 	}
-	while(oper < 9);
+	while(oper < 10);
 	return 0;
 }

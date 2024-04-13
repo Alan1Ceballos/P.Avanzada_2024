@@ -16,6 +16,7 @@ public:
 	PartidaIndividual();
 	bool getContinuaPartidaAnterior();
 	void setContinuaPartidaAnterior(bool);
+	virtual float darTotalHorasParticipantes() override;
 	virtual ~PartidaIndividual();
 };
 

@@ -17,6 +17,8 @@ public:
 	Partida();
 	float getDuracion();
 	void setDuracion(float);
+	void setFecha(DtFechaHora);
+	DtFechaHora getFecha();
 	virtual float darTotalHorasParticipantes() = 0;
 	virtual ~Partida();
 };

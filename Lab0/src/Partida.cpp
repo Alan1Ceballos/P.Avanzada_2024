@@ -6,10 +6,7 @@
  */
 
 #include "Partida.h"
-
 Partida::Partida() {
-	// TODO Auto-generated constructor stub
-
 }
 
 float Partida::getDuracion(){
@@ -18,6 +15,14 @@ float Partida::getDuracion(){
 
 void Partida::setDuracion(float newDuracion){
 	this->duracion = newDuracion;
+}
+
+void Partida::setFecha(DtFechaHora fecha){
+	this->fecha = fecha;
+}
+
+DtFechaHora Partida::getFecha() {
+    return fecha;
 }
 
 Partida::~Partida() {

@@ -11,7 +11,10 @@
 #include <string>
 #include "Jugador.h"
 #include "Partida.h"
+#include "PartidaIndividual.h"
+#include "PartidaMultijugador.h"
 #include "Videojuego.h"
+#include "DtFechaHora.h"
 using namespace::std;
 
 
@@ -23,6 +26,10 @@ Partida* obtenerPartidas(string videojuego, int cantPartidas);
 void iniciarPartida(string nickname, string videojuego, Partida* datos);
 void mostrarJuegos();//AUX
 void MostrarJugadores();//AUX
-
+void mostrarPartidasVideojuego(string);//AUX
+bool encontrarJugador(string);//AUX
+void obtenerDatosP(string&, string&, float&, char&);//AUX
+Partida* crearPartida(char);//AUX
+void configPartida(Partida*);//AUX
 
 #endif /* SISTEMA_H_ */

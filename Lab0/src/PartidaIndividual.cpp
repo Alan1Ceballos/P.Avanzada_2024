@@ -20,6 +20,10 @@ void PartidaIndividual::setContinuaPartidaAnterior(bool newCPA){
 	this->continuaPartidaAnterior = newCPA;
 }
 
+float PartidaIndividual::darTotalHorasParticipantes(){
+	return getDuracion();
+}
+
 PartidaIndividual::~PartidaIndividual() {
 	// TODO Auto-generated destructor stub
 }
