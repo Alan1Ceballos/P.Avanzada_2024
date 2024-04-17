@@ -18,7 +18,7 @@ vector<PartidaMultijugador> PMultijugador;
 void agregarJugador(string nickname, int edad, string contrasenia){
 	int JS = Jugadores.size();
 	for(int i = 0; i < JS; i++){
-		if(Jugadores[i].getNickname() == nickname) {
+		if(Jugadores[i].getNickname() == nickname){
 			throw runtime_error("Este jugador ya existe!");
 		}
 	}
@@ -41,21 +41,6 @@ void agregarVideojuego(string nombre, DtTipoJuego genero){
 	newJuego.setNombre(nombre);
 	newJuego.setGenero(genero);
 	Juegos.push_back(newJuego);
-}
-
-void mostrarJuegos() {
-    if (Juegos.empty()) {
-        cout<<"No hay juegos registrados"<<endl;
-        return;
-    }
-    cout<<endl;
-    cout << "[Lista de juegos]:" << endl;
-    int c = Juegos.size();
-    for(int i = 0; i < c; i++){
-        cout << "Nombre: " << Juegos[i].getNombre() << endl;
-        cout << "Género: " << Juegos[i].getGenero().getNombre() << endl;
-        cout << "-------------------------" << endl;
-    }
 }
 
 //=====================================================================
@@ -135,52 +120,46 @@ void mostrarVideojuegos(vector<Videojuego*> listaVideojuegos){
 
 
 vector<Partida*> obtenerPartidas(string videojuego, int cantPartidas) {
-    Videojuego* juego = NULL;
-    int j = Juegos.size();
-    for(int i = 0; i < j; ++i){
-        if(Juegos[i].getNombre() == videojuego){
-            juego = &Juegos[i];
-            break;
-        }
-    }
+	Videojuego* juego = NULL;
+	int j = Juegos.size();
+	for(int i = 0; i < j; ++i){
+		if(Juegos[i].getNombre() == videojuego){
+			juego = &Juegos[i];
+			break;
+		}
+	}
+
     if(juego == NULL){
-        cout<<"No existe un videojuego registrado con ese nombre"<<endl;
-        cantPartidas = 0;
-        return vector<Partida*>();
+    	throw runtime_error("No existe un videojuego registrado con ese nombre");
     }
+
     vector<Partida*> partidas = juego->getPartida();
     cantPartidas = partidas.size();
     return partidas;
 }
 
 void mostrarPartidas(vector<Partida*> partidas){
-	int PZ = partidas.size();
-	for(int i = 0; i < PZ; ++i){
+	int PS = partidas.size();
+	for(int i = 0; i < PS; ++i){
 		Partida* partida = partidas[i];
-		cout<<"Partida: "<<i+1<<":"<<endl;
+		cout<<"Partida: "<<i + 1<<":"<<endl;
 		cout<<"Duración: "<<partida->getDuracion()<<" horas"<<endl;
 
-		if(partida == NULL){
-			cout<<"Houston, we got a problem!"<<endl;
+		if(PartidaIndividual* partidaIndividual = dynamic_cast<PartidaIndividual*>(partida)){
+			cout<<"Tipo de partida: Individual"<<endl;
+			cout<<"Continuación de partida anterior: "<<(partidaIndividual->getContinuaPartidaAnterior() ? "Sí" : "No")<<endl;
 		}
-		else{
-			if (PartidaIndividual* partidaIndividual = dynamic_cast<PartidaIndividual*>(partida)) {
-				cout<<"Tipo de partida: Individual"<<endl;
-				cout<<"Continuación de partida anterior: "<<(partidaIndividual->getContinuaPartidaAnterior() ? "Sí" : "No")<<endl;
+		else if(PartidaMultijugador* partidaMultijugador = dynamic_cast<PartidaMultijugador*>(partida)){
+			cout<<"Tipo de partida: Multijugador"<<endl;
+			cout<<"Transmitida en vivo: "<<(partidaMultijugador->getTransmitidaEnVivo() ? "Sí" : "No")<<endl;
+			cout<<"Cantidad total de jugadores: "<<partidaMultijugador->getCantidadTotalJugadores()<<endl;
+			cout<<"Nicknames de los jugadores participantes:"<<endl;
+			vector<string> jugadores = partidaMultijugador->getJugadores();
+			for(auto& jugador : jugadores) {
+				cout << "- " << jugador << endl;
 			}
-			else if (PartidaMultijugador* partidaMultijugador = dynamic_cast<PartidaMultijugador*>(partida)) {
-				cout<<"Tipo de partida: Multijugador"<<endl;
-				cout<<"Transmitida en vivo: "<<(partidaMultijugador->getTransmitidaEnVivo() ? "Sí" : "No")<<endl;
-				cout<<"Cantidad total de jugadores: "<<partidaMultijugador->getCantidadTotalJugadores()<<endl;
-				cout<<"Nicknames de los jugadores participantes:"<<endl;
-				vector<string> jugadores = partidaMultijugador->getJugadores();
-				int JS = jugadores.size();
-				for(int j = 0; j < JS; ++j) {
-					cout<<"- "<<jugadores[j]<<endl;
-				}
-			}
-			cout<<"-------------------------"<<endl;
 		}
+		cout<<"-------------------------"<<endl;
 	}
 }
 
@@ -199,7 +178,7 @@ void iniciarPartida(string nickname, string videojuego, Partida* datos){
         }
     }
     if(!Jugador){
-        cout<<"No se encontró ningún jugador con ese nickname";
+    	throw runtime_error("No se encontró ningún jugador con ese nickname");
     }
 
     datos->setJugadorCreador(Jugador);
@@ -213,8 +192,7 @@ void iniciarPartida(string nickname, string videojuego, Partida* datos){
         }
     }
     if(!Juego){
-        cout<<"No se encontró ningún juego con ese nombre";
-        return;
+    	throw runtime_error("No se encontró ningún juego con ese nombre");
     }
 
     time_t now = time(0);
@@ -278,25 +256,27 @@ Videojuego* encontrarJuego(string nombre){
 
 
 void obtenerDatosP(string& nickname, string& videojuego, float& duracion, char& tipoPartida){
-    cout << "Ingrese su nickname: ";
+    cout<<"Ingrese su nickname: ";
     cin.ignore();
     getline(cin, nickname);
-    cout << "Ingrese el nombre del juego: ";
+    cout<<"Ingrese el nombre del juego: ";
     getline(cin, videojuego);
-    cout << "Ingrese la duracion de la partida (en horas, ej: 1.5 (hora y media): ";
-    cin >> duracion;
-    cout << "¿La partida fue individual (i) o multijugador (m)?: ";
-    cin >> tipoPartida;
+    cout<<"Ingrese la duracion de la partida (en horas, ej: 1.5 (hora y media): ";
+    cin>>duracion;
+    cout<<"¿La partida fue individual (i) o multijugador (m)?: ";
+    cin>>tipoPartida;
 }
 
 Partida* crearPartida(char tipoPartida){
     Partida* partida = NULL;
     if(tipoPartida == 'i' || tipoPartida == 'I'){
         partida = new PartidaIndividual();
-    } else if(tipoPartida == 'm' || tipoPartida == 'M'){
+    }
+    else if(tipoPartida == 'm' || tipoPartida == 'M'){
         partida = new PartidaMultijugador();
-    } else {
-        cout << "Opción inválida!" << endl;
+    }
+    else{
+    	throw runtime_error("Opcion invalida");
     }
     return partida;
 }
@@ -304,29 +284,30 @@ Partida* crearPartida(char tipoPartida){
 void configPartida(Partida* partida){
     if(PartidaIndividual* partidaIndividual = dynamic_cast<PartidaIndividual*>(partida)){
         char continuar;
-        cout << "¿La partida es una continuación de una anterior(s/n)?: ";
-        cin >> continuar;
+        cout<<"¿La partida es una continuación de una anterior(s/n)?: ";
+        cin>>continuar;
         bool esContinuacion = (continuar == 's' || continuar == 'S');
         partidaIndividual->setContinuaPartidaAnterior(esContinuacion);
-    } else if(PartidaMultijugador* partidaMultijugador = dynamic_cast<PartidaMultijugador*>(partida)){
+    }
+    else if(PartidaMultijugador* partidaMultijugador = dynamic_cast<PartidaMultijugador*>(partida)){
         char enVivo;
-        cout << "¿La partida fue transmitida en vivo(s/n)?: ";
-        cin >> enVivo;
+        cout<<"¿La partida fue transmitida en vivo(s/n)?: ";
+        cin>>enVivo;
         bool esTransmitida = (enVivo == 's' || enVivo == 'S');
         partidaMultijugador->setTransmitidaEnVivo(esTransmitida);
         string nombreJugador;
         do{
-            cout << "Ingrese los nicknames de los demás jugadores ('Fin' para finalizar): ";
-            cin >> nombreJugador;
+            cout<<"Ingrese los nicknames de los demás jugadores ('Fin' para finalizar): ";
+            cin>>nombreJugador;
             if(nombreJugador != "fin" && nombreJugador != "Fin"){
                 if(!encontrarJugador(nombreJugador)){
-                    cout << "El jugador con nickname '" << nombreJugador << "' no existe en el sistema" << endl;
+                    cout<<"El jugador con nickname '"<<nombreJugador<<"' no existe en el sistema"<<endl;
                 }
-                else {
+                else{
                     partidaMultijugador->unirseaPartida(new Jugador(nombreJugador, 0, ""));
                 }
             }
-        } while(nombreJugador != "fin" && nombreJugador != "Fin");
+        }while(nombreJugador != "fin" && nombreJugador != "Fin");
     }
 }
 

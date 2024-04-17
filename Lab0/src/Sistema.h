@@ -37,5 +37,4 @@ Partida* crearPartida(char);//AUX
 void configPartida(Partida*);//AUX
 Videojuego* encontrarJuego(string);//AUX
 
-
 #endif /* SISTEMA_H_ */

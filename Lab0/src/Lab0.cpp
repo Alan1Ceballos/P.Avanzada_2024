@@ -70,18 +70,18 @@ int main() {
 			}
 	};*/
 	do {
-		cout<< 	"------------------------------------"<<endl;
+		cout<< 	"-----------------------------------------"<<endl;
 		cout<<	"-                                 	-"<<endl;
 		cout<<  "-              MENU              	-"<<endl;
 		cout<<  "-          1-AGREGAR JUGADOR		-"<<endl;
-		cout<<  "-          2-AGREGAR VIDEOJUEGO	-"<<endl;
+		cout<<  "-          2-AGREGAR VIDEOJUEGO		-"<<endl;
 		cout<<  "-          3-OBTENER JUGADORES		-"<<endl;
 		cout<<  "-          4-OBTENER VIDEOJUEGOS	-"<<endl;
 		cout<<  "-          5-OBTENER PARTIDAS		-"<<endl;
 		cout<<  "-          6-INICIAR PARTIDA		-"<<endl;
-		cout<<  "-          7-SALIR					-"<<endl;
+		cout<<  "-          7-SALIR			-"<<endl;
 		cout<<  "-                                 	-"<<endl;
-		cout<<  "------------------------------------"<<endl;
+		cout<<  "-----------------------------------------"<<endl;
 		cin >> oper;
 		switch (oper)
 		{
@@ -97,27 +97,37 @@ int main() {
 				cout<<"Ingrese la contrasenia: ";
 				cin>>contrasenia;
 				agregarJugador(nombre, edad, contrasenia);
-				cout<< "OK" <<endl;
+				cout<<"OK"<<endl;
 				break;
 			}
 			case 2:{
-				string nombre;
-				string genero;
-				cout<<"Ingrese el nombre del videojuego: ";
-				cin.ignore();
-				getline(cin, nombre);
-				cout<<"Ingrese el género principal del videojuego: ";
-				getline(cin, genero);
-				agregarVideojuego(nombre, genero);
+				try{
+					string nombre;
+					string genero;
+					cout<<"Ingrese el nombre del videojuego: ";
+					cin.ignore();
+					getline(cin, nombre);
+					cout<<"Ingrese el género principal del videojuego: ";
+					getline(cin, genero);
+					agregarVideojuego(nombre, genero);
+				}
+				catch(runtime_error& e){
+					cerr<<"Error: "<<e.what()<<endl;
+				}
 				break;
 			}
 			case 3:{
-				int cantJugadores = 0;
-				vector<Jugador*> jugadores = obtenerJugadores(cantJugadores);
-				cout<<"Jugadores registrados en el sistema: "<<endl;
-				mostrarJugadores(jugadores);
-				for(Jugador* jugador : jugadores){
-					delete jugador;
+				try{
+					int cantJugadores = 0;
+					vector<Jugador*> jugadores = obtenerJugadores(cantJugadores);
+					cout<<"Jugadores registrados en el sistema: "<<endl;
+					mostrarJugadores(jugadores);
+					for(Jugador* jugador : jugadores){
+						delete jugador;
+					}
+				}
+				catch(runtime_error& e) {
+					cerr<<"Error: "<<e.what()<<endl;
 				}
 				break;
 			}
@@ -136,13 +146,26 @@ int main() {
 				cout<<"Ingrese el nombre del juego: ";
 				cin.ignore();
 				getline(cin, nombreJuego);
-				vector<Partida*> partidas = obtenerPartidas(nombreJuego, cantPartidas);
-				if(!partidas.empty()){
-					mostrarPartidas(partidas);
+
+				if(nombreJuego.empty()){
+					cout<<"El nombre del juego no puede estar vacío"<<endl;
+					break;
 				}
-				else{
-					cout<<"No se encontraron partidas para el videojuego '"<<nombreJuego<<"'."<<endl;
+				try{
+					vector<Partida*> partidas = obtenerPartidas(nombreJuego, cantPartidas);
+					if(!partidas.empty()){
+						mostrarPartidas(partidas);
+						for(auto partida : partidas) {
+							delete partida;
+						}
+					}
+					else{
+						cout<<"No se encontraron partidas para el videojuego '"<<nombreJuego<<"'."<<endl;
+					}
 				}
+				catch(runtime_error& e) {
+			        cerr<<"Error: "<<e.what()<<endl;
+			    }
 				break;
 			}
 			case 6:{
