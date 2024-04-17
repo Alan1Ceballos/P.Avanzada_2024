@@ -86,18 +86,22 @@ int main() {
 		switch (oper)
 		{
 			case 1:{
-				string nombre;
-				int edad;
-				string contrasenia;
-				cout<<"Ingrese el nickname: ";
-				cin.ignore();
-				getline(cin, nombre);
-				cout<<"Ingrese la edad: ";
-				cin>>edad;
-				cout<<"Ingrese la contrasenia: ";
-				cin>>contrasenia;
-				agregarJugador(nombre, edad, contrasenia);
-				cout<<"OK"<<endl;
+				try{
+					string nombre;
+					int edad;
+					string contrasenia;
+					cout<<"Ingrese el nickname: ";
+					cin.ignore();
+					getline(cin, nombre);
+					cout<<"Ingrese la edad: ";
+					cin>>edad;
+					cout<<"Ingrese la contrasenia: ";
+					cin>>contrasenia;
+					agregarJugador(nombre, edad, contrasenia);
+				}
+				catch(runtime_error& e){
+					cerr<<"Error: "<<e.what()<<endl;
+				}
 				break;
 			}
 			case 2:{
@@ -132,11 +136,15 @@ int main() {
 				break;
 			}
 			case 4:{
-				int cantVideojuegos = 0;
-				vector<Videojuego*> juegos = obtenerVideojuegos(cantVideojuegos);
-				mostrarVideojuegos(juegos);
-				for(auto juego : juegos){
-					delete juego;
+				try{
+					int cantVideojuegos = 0;
+					vector<Videojuego*> juegos = obtenerVideojuegos(cantVideojuegos);
+					mostrarVideojuegos(juegos);
+					for(auto juego : juegos){
+						delete juego;
+					}
+				}catch(runtime_error& e){
+					cerr<<"Error: "<<e.what()<<endl;
 				}
 				break;
 			}

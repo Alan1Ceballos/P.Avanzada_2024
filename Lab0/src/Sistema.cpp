@@ -76,7 +76,7 @@ void mostrarJugadores(vector<Jugador*> listaJugadores){
 
 vector<Videojuego*> obtenerVideojuegos(int cantVideojuegos) {
 	if(Juegos.empty()){
-		throw std::runtime_error("No hay videojuegos registrados");
+		throw runtime_error("No hay videojuegos registrados");
 	}
 	cantVideojuegos = Juegos.size();
 	vector<Videojuego*> listaVideojuegos;
@@ -87,10 +87,10 @@ vector<Videojuego*> obtenerVideojuegos(int cantVideojuegos) {
 		int PS = partidas.size();
 		for (int j = 0; j < PS; j++) {
 			Partida* partida = partidas[j];
-			if (auto* partidaIndividual = dynamic_cast<PartidaIndividual*>(partida)) {
+			if (PartidaIndividual* partidaIndividual = dynamic_cast<PartidaIndividual*>(partida)) {
 				totalHoras += partidaIndividual->getDuracion();
 			}
-			else if(auto* partidaMultijugador = dynamic_cast<PartidaMultijugador*>(partida)) {
+			else if(PartidaMultijugador* partidaMultijugador = dynamic_cast<PartidaMultijugador*>(partida)) {
 				totalHoras += partidaMultijugador->getDuracion() * partidaMultijugador->getCantidadTotalJugadores();
 			}
 		}
