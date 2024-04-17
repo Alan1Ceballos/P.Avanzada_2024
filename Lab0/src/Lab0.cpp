@@ -177,15 +177,19 @@ int main() {
 				break;
 			}
 			case 6:{
-				string nickname, videojuego;
-				float duracion = 0;
-				char tipoPartida = '\0';
-				obtenerDatosP(nickname, videojuego, duracion, tipoPartida);
-				Partida* partida = crearPartida(tipoPartida);
-				partida->setDuracion(duracion);
-				configPartida(partida);
-				iniciarPartida(nickname, videojuego, partida);
-				delete partida;
+				try{
+					string nickname, videojuego;
+					float duracion = 0;
+					char tipoPartida = '\0';
+					obtenerDatosP(nickname, videojuego, duracion, tipoPartida);
+					Partida* partida = crearPartida(tipoPartida);
+					partida->setDuracion(duracion);
+					configPartida(partida);
+					iniciarPartida(nickname, videojuego, partida);
+					delete partida;
+				}catch(runtime_error& e){
+					cerr<<"Error: "<<e.what()<<endl;
+				}
 				break;
 			}
 		default:{
