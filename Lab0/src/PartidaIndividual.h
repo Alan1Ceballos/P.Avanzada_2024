@@ -12,11 +12,14 @@
 class PartidaIndividual: public Partida {
 private:
 	bool continuaPartidaAnterior;
+	Videojuego* videojuego;
 public:
 	PartidaIndividual();
 	bool getContinuaPartidaAnterior();
 	void setContinuaPartidaAnterior(bool);
 	virtual float darTotalHorasParticipantes() override;
+	Videojuego* getVideojuego();
+	void setVideojuego(Videojuego*) override;
 	virtual ~PartidaIndividual();
 };
 

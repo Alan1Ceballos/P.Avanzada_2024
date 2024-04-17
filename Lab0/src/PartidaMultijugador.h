@@ -9,12 +9,14 @@
 #define PARTIDAMULTIJUGADOR_H_
 #include "Partida.h"
 #include "Jugador.h"
+#include "Videojuego.h"
 #include <vector>
 
 class PartidaMultijugador: public Partida {
 private:
 	bool transmitidaEnVivo;
 	vector<string> jugadores;
+	Videojuego* videojuego;
 public:
 	PartidaMultijugador();
 	bool getTransmitidaEnVivo();
@@ -23,6 +25,8 @@ public:
 	void unirseaPartida(Jugador*);
 	int getCantidadTotalJugadores();
 	vector<string> getJugadores();
+	Videojuego* getVideojuego();
+	void setVideojuego(Videojuego*) override;
 	virtual ~PartidaMultijugador();
 };
 

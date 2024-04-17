@@ -49,6 +49,17 @@ int DtFechaHora::getMinuto()  {
     return minuto;
 }
 
+string DtFechaHora::presentate(){
+	string dia, mes, anio, hora, minuto;
+	dia = to_string(this->dia);
+	mes = to_string(this->mes);
+	anio = to_string(this->anio);
+	hora = to_string(this->hora);
+	minuto = to_string(this->minuto);
+	return dia + "/" + mes + "/" + anio + " - " + hora + ":" + minuto;
+}
+
+
 DtFechaHora::~DtFechaHora() {
 	// TODO Auto-generated destructor stub
 }

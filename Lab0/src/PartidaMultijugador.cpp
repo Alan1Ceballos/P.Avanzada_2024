@@ -7,8 +7,7 @@
 
 #include "PartidaMultijugador.h"
 
-PartidaMultijugador::PartidaMultijugador() {
-	// TODO Auto-generated constructor stub
+PartidaMultijugador::PartidaMultijugador() : transmitidaEnVivo(false), jugadores(), videojuego(NULL) {
 
 }
 
@@ -25,7 +24,16 @@ float PartidaMultijugador::darTotalHorasParticipantes(){
 }
 
 void PartidaMultijugador::unirseaPartida(Jugador* jugador){
-	jugadores.push_back(jugador->getNickname());
+	bool encontrado = false;
+	for(size_t i = 0; i < jugadores.size(); ++i){
+		if(jugadores[i] == jugador->getNickname()){
+			encontrado = true;
+			break;
+		}
+	}
+	if(!encontrado) {
+		jugadores.push_back(jugador->getNickname());
+	}
 }
 
 int PartidaMultijugador::getCantidadTotalJugadores(){
@@ -36,6 +44,15 @@ int PartidaMultijugador::getCantidadTotalJugadores(){
 vector<string> PartidaMultijugador::getJugadores(){
 	return jugadores;
 }
+
+Videojuego* PartidaMultijugador::getVideojuego(){
+	return videojuego;
+}
+
+void PartidaMultijugador::setVideojuego(Videojuego* juego){
+	this->videojuego = juego;
+}
+
 
 PartidaMultijugador::~PartidaMultijugador() {
 	// TODO Auto-generated destructor stub

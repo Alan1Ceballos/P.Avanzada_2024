@@ -7,8 +7,7 @@
 
 #include "PartidaIndividual.h"
 
-PartidaIndividual::PartidaIndividual() {
-	// TODO Auto-generated constructor stub
+PartidaIndividual::PartidaIndividual() : continuaPartidaAnterior(false), videojuego(NULL){
 
 }
 
@@ -24,7 +23,14 @@ float PartidaIndividual::darTotalHorasParticipantes(){
 	return getDuracion();
 }
 
+Videojuego* PartidaIndividual::getVideojuego(){
+	return videojuego;
+}
+
+void PartidaIndividual::setVideojuego(Videojuego* juego){
+	this->videojuego = juego;
+}
+
 PartidaIndividual::~PartidaIndividual() {
 	// TODO Auto-generated destructor stub
 }
-

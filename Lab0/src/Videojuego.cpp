@@ -8,7 +8,7 @@
 #include "Videojuego.h"
 #include <string>
 
-Videojuego::Videojuego() {
+Videojuego::Videojuego() : nombre(""), genero(), partidas(), jugadores(), totalHorasDeJuego(0.0) {
 
 }
 
@@ -31,18 +31,14 @@ vector<Partida*> Videojuego::getPartida(){
 }
 
 void Videojuego::agregarPartida(Partida* partida) {
-	partidas.push_back(partida);
+	Partida* nuevaPartida = partida;
+	partidas.push_back(nuevaPartida);
 }
 
-void Videojuego::agregarJugador(Jugador* jugador){
-	int jug = jugadores.size();
-	for(int i = 0; i < jug; ++i){
-		if(jugadores[i]->getNickname() == jugador->getNickname()){
-			return;
-		}
-	}
+void Videojuego::agregarJugador(Jugador* jugador) {
 	jugadores.push_back(jugador);
 }
+
 
 float Videojuego::totalHorasDedicadas(){
 	float horasTotales = 0.0;
@@ -53,6 +49,13 @@ float Videojuego::totalHorasDedicadas(){
 	return horasTotales;
 }
 
+float Videojuego::getTotalHorasDeJuego(){
+	return totalHorasDeJuego;
+}
+
+void Videojuego::setTotalHorasDeJuego(float horas){
+	totalHorasDeJuego = horas;
+}
 
 Videojuego::~Videojuego() {
 	// TODO Auto-generated destructor stub

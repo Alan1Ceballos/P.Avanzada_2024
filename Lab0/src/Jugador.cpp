@@ -8,7 +8,7 @@
 #include "Jugador.h"
 #include <string>
 
-Jugador::Jugador() {
+Jugador::Jugador() : nickname(""), edad(0), contrasenia("") {
 	// TODO Auto-generated constructor stub
 
 }

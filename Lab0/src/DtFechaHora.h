@@ -7,6 +7,8 @@
 
 #ifndef DTFECHAHORA_H_
 #define DTFECHAHORA_H_
+#include <string>
+using namespace::std;
 
 class DtFechaHora {
 private:
@@ -20,6 +22,7 @@ public:
 	int getAnio();
 	int getHora();
 	int getMinuto();
+	string presentate();
 	virtual ~DtFechaHora();
 };
 
