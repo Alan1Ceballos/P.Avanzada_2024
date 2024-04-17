@@ -301,7 +301,7 @@ void configPartida(Partida* partida){
             cin>>nombreJugador;
             if(nombreJugador != "fin" && nombreJugador != "Fin"){
                 if(!encontrarJugador(nombreJugador)){
-                	throw runtime_error("El jugador con nickname '"<<nombreJugador<<"' no existe en el sistema");
+                	throw runtime_error("El jugador con nickname '" + nombreJugador + "' no existe en el sistema");
                 }
                 else{
                     partidaMultijugador->unirseaPartida(new Jugador(nombreJugador, 0, ""));
