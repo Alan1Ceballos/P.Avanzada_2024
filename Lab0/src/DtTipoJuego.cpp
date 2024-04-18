@@ -12,6 +12,12 @@ DtTipoJuego::DtTipoJuego(string new_nombre) {
 
 }
 
+string DtTipoJuego::getNombre() {
+	return this->nombre;
+
+}
+
+
 DtTipoJuego::~DtTipoJuego() {
 	// TODO Auto-generated destructor stub
 }

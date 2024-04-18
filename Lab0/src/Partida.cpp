@@ -6,10 +6,7 @@
  */
 
 #include "Partida.h"
-
-Partida::Partida() {
-	// TODO Auto-generated constructor stub
-
+Partida::Partida() : fecha(), duracion(0.0f), jugadorCreador(NULL) {
 }
 
 float Partida::getDuracion(){
@@ -20,7 +17,22 @@ void Partida::setDuracion(float newDuracion){
 	this->duracion = newDuracion;
 }
 
+void Partida::setFecha(DtFechaHora fecha){
+	this->fecha = fecha;
+}
+
+DtFechaHora Partida::getFecha() {
+    return fecha;
+}
+
+Jugador* Partida::getJugadorCreador(){
+	return jugadorCreador;
+}
+
+void Partida::setJugadorCreador(Jugador* jugadorCreador){
+	this->jugadorCreador = jugadorCreador;
+}
+
 Partida::~Partida() {
 	// TODO Auto-generated destructor stub
 }
-

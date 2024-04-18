@@ -8,17 +8,31 @@
 #ifndef VIDEOJUEGO_H_
 #define VIDEOJUEGO_H_
 #include <string>
+#include <vector>
 #include "DtTipoJuego.h"
+#include "Partida.h"
+#include "Jugador.h"
 using namespace::std;
 
 class Videojuego {
 private:
 	string nombre;
 	DtTipoJuego genero;
+	vector<Partida*> partidas;
+	vector<Jugador*> jugadores;
+	float totalHorasDeJuego;
 public:
 	Videojuego();
 	string getNombre();
 	void setNombre(string);
+	DtTipoJuego getGenero();
+	void setGenero(DtTipoJuego);
+	vector<Partida*> getPartida();
+	void agregarPartida(Partida*);
+	void agregarJugador(Jugador*);
+	float totalHorasDedicadas();
+	float getTotalHorasDeJuego();
+	void setTotalHorasDeJuego(float);
 	virtual ~Videojuego();
 };
 
