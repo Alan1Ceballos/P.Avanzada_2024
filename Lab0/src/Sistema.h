@@ -30,7 +30,7 @@ vector<Partida*> obtenerPartidas(string videojuego, int cantPartidas);
 void iniciarPartida(string nickname, string videojuego, Partida* datos);
 void mostrarVideojuegos(vector<Videojuego*>);//AUX
 void mostrarJugadores(vector<Jugador*>);//AUX
-void mostrarPartidas(vector<Partida*>);//AUX
+void mostrarPartidas(vector<Partida*>&);//AUX
 bool encontrarJugador(string);//AUX
 void obtenerDatosP(string&, string&, float&, char&);//AUX
 Partida* crearPartida(char);//AUX

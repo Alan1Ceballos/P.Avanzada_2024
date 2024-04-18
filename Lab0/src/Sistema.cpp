@@ -132,13 +132,12 @@ vector<Partida*> obtenerPartidas(string videojuego, int cantPartidas) {
     if(juego == NULL){
     	throw runtime_error("No existe un videojuego registrado con ese nombre");
     }
-
     vector<Partida*> partidas = juego->getPartida();
     cantPartidas = partidas.size();
     return partidas;
 }
 
-void mostrarPartidas(vector<Partida*> partidas){
+void mostrarPartidas(vector<Partida*>& partidas){
 	int PS = partidas.size();
 	for(int i = 0; i < PS; ++i){
 		Partida* partida = partidas[i];
@@ -155,8 +154,8 @@ void mostrarPartidas(vector<Partida*> partidas){
 			cout<<"Cantidad total de jugadores: "<<partidaMultijugador->getCantidadTotalJugadores()<<endl;
 			cout<<"Nicknames de los jugadores participantes:"<<endl;
 			vector<string> jugadores = partidaMultijugador->getJugadores();
-			for(auto& jugador : jugadores) {
-				cout << "- " << jugador << endl;
+			for(auto& jugador : jugadores){
+				cout<<"- "<<jugador<<endl;
 			}
 		}
 		cout<<"-------------------------"<<endl;
@@ -211,14 +210,14 @@ void iniciarPartida(string nickname, string videojuego, Partida* datos){
     	cout<<"Creando una partida individual..."<<endl;
     	Juego->agregarPartida(partidaIndividual);
     	Juego->agregarJugador(Jugador);
-    	//PIndividual.push_back(*partidaIndividual);
+    	PIndividual.push_back(*partidaIndividual);
     	cout<<"Partida individual creada y jugador agregado al juego"<<endl;
     }
     else if(PartidaMultijugador* partidaMultijugador = dynamic_cast<PartidaMultijugador*>(datos)){
     	cout<<"Creando una partida multijugador..."<<endl;
     	Juego->agregarPartida(partidaMultijugador);
     	Juego->agregarJugador(Jugador);
-    	//PMultijugador.push_back(*partidaMultijugador);
+    	PMultijugador.push_back(*partidaMultijugador);
     	cout<<"Partida multijugador creada y jugador agregado al juego"<<endl;
     }
     else{
@@ -263,6 +262,7 @@ void obtenerDatosP(string& nickname, string& videojuego, float& duracion, char& 
     getline(cin, videojuego);
     cout<<"Ingrese la duracion de la partida (en horas, ej: 1.5 (hora y media): ";
     cin>>duracion;
+    cin.ignore();
     cout<<"¿La partida fue individual (i) o multijugador (m)?: ";
     cin>>tipoPartida;
 }

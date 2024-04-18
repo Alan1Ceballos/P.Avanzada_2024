@@ -6,7 +6,7 @@
  */
 
 #include "Partida.h"
-Partida::Partida() : fecha(), duracion(0.0), jugadorCreador(NULL) {
+Partida::Partida() : fecha(), duracion(0.0f), jugadorCreador(NULL) {
 }
 
 float Partida::getDuracion(){

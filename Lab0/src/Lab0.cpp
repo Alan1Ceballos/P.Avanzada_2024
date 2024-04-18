@@ -179,7 +179,7 @@ int main() {
 			case 6:{
 				try{
 					string nickname, videojuego;
-					float duracion = 0;
+					float duracion = 0.0f;
 					char tipoPartida = '\0';
 					obtenerDatosP(nickname, videojuego, duracion, tipoPartida);
 					Partida* partida = crearPartida(tipoPartida);
