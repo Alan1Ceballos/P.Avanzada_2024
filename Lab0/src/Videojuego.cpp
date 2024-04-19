@@ -8,7 +8,7 @@
 #include "Videojuego.h"
 #include <string>
 
-Videojuego::Videojuego() : nombre(""), genero(), partidas(), jugadores(), totalHorasDeJuego(0.0) {
+Videojuego::Videojuego() : nombre(""), genero(), partidas(), jugadores(), totalHorasDeJuego() {
 
 }
 
@@ -26,7 +26,7 @@ void Videojuego::setGenero(DtTipoJuego newGenero){
 	this->genero = newGenero;
 }
 
-vector<Partida*> Videojuego::getPartida(){
+vector<Partida*> Videojuego::getPartidas(){
 	return this->partidas;
 }
 
@@ -40,8 +40,8 @@ void Videojuego::agregarJugador(Jugador* jugador) {
 }
 
 
-float Videojuego::totalHorasDedicadas(){
-	float horasTotales = 0.0;
+double Videojuego::totalHorasDedicadas(){
+	double horasTotales = 0.0;
 	int p = partidas.size();
 	for(int i = 0; i < p; ++i){
 		horasTotales += partidas[i]->darTotalHorasParticipantes();
@@ -49,11 +49,11 @@ float Videojuego::totalHorasDedicadas(){
 	return horasTotales;
 }
 
-float Videojuego::getTotalHorasDeJuego(){
+double Videojuego::getTotalHorasDeJuego(){
 	return totalHorasDeJuego;
 }
 
-void Videojuego::setTotalHorasDeJuego(float horas){
+void Videojuego::setTotalHorasDeJuego(double horas){
 	totalHorasDeJuego = horas;
 }
 

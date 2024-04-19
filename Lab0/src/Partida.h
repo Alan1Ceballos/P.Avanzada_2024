@@ -14,12 +14,12 @@ class Videojuego;
 class Partida {
 private:
 	DtFechaHora fecha;
-	float duracion;
+	double duracion;
 	Jugador* jugadorCreador;
 public:
 	Partida();
-	float getDuracion();
-	void setDuracion(float);
+	double getDuracion();
+	void setDuracion(double);
 	void setFecha(DtFechaHora);
 	DtFechaHora getFecha();
 	Jugador* getJugadorCreador();

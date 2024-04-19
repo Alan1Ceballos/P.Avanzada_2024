@@ -6,14 +6,14 @@
  */
 
 #include "Partida.h"
-Partida::Partida() : fecha(), duracion(0.0f), jugadorCreador(NULL) {
+Partida::Partida() : fecha(), duracion(), jugadorCreador(NULL) {
 }
 
-float Partida::getDuracion(){
+double Partida::getDuracion(){
 	return this->duracion;
 }
 
-void Partida::setDuracion(float newDuracion){
+void Partida::setDuracion(double newDuracion){
 	this->duracion = newDuracion;
 }
 

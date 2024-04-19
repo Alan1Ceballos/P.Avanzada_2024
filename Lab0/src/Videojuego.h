@@ -20,19 +20,19 @@ private:
 	DtTipoJuego genero;
 	vector<Partida*> partidas;
 	vector<Jugador*> jugadores;
-	float totalHorasDeJuego;
+	double totalHorasDeJuego;
 public:
 	Videojuego();
 	string getNombre();
 	void setNombre(string);
 	DtTipoJuego getGenero();
 	void setGenero(DtTipoJuego);
-	vector<Partida*> getPartida();
+	vector<Partida*> getPartidas();
 	void agregarPartida(Partida*);
 	void agregarJugador(Jugador*);
-	float totalHorasDedicadas();
-	float getTotalHorasDeJuego();
-	void setTotalHorasDeJuego(float);
+	double totalHorasDedicadas();
+	double getTotalHorasDeJuego();
+	void setTotalHorasDeJuego(double);
 	virtual ~Videojuego();
 };
 

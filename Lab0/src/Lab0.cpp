@@ -11,6 +11,7 @@
 using namespace std;
 int main() {
 	int oper;
+	Sistema* sistema = new Sistema;
 	/*agregarJugador("Player1", 25, "contrasenia1");
 	agregarJugador("Player2", 22, "contrasenia2");
 	agregarJugador("Player3", 21, "contrasenia3");
@@ -97,7 +98,7 @@ int main() {
 					cin>>edad;
 					cout<<"Ingrese la contrasenia: ";
 					cin>>contrasenia;
-					agregarJugador(nombre, edad, contrasenia);
+					sistema->agregarJugador(nombre, edad, contrasenia);
 				}
 				catch(runtime_error& e){
 					cerr<<"Error: "<<e.what()<<endl;
@@ -113,7 +114,7 @@ int main() {
 					getline(cin, nombre);
 					cout<<"Ingrese el género principal del videojuego: ";
 					getline(cin, genero);
-					agregarVideojuego(nombre, genero);
+					sistema->agregarVideojuego(nombre, genero);
 				}
 				catch(runtime_error& e){
 					cerr<<"Error: "<<e.what()<<endl;
@@ -123,9 +124,9 @@ int main() {
 			case 3:{
 				try{
 					int cantJugadores = 0;
-					vector<Jugador*> jugadores = obtenerJugadores(cantJugadores);
+					vector<Jugador*> jugadores = sistema->obtenerJugadores(cantJugadores);
 					cout<<"Jugadores registrados en el sistema: "<<endl;
-					mostrarJugadores(jugadores);
+					sistema->mostrarJugadores(jugadores);
 					for(Jugador* jugador : jugadores){
 						delete jugador;
 					}
@@ -138,8 +139,8 @@ int main() {
 			case 4:{
 				try{
 					int cantVideojuegos = 0;
-					vector<Videojuego*> juegos = obtenerVideojuegos(cantVideojuegos);
-					mostrarVideojuegos(juegos);
+					vector<Videojuego*> juegos = sistema->obtenerVideojuegos(cantVideojuegos);
+					sistema->mostrarVideojuegos(juegos);
 					for(auto juego : juegos){
 						delete juego;
 					}
@@ -159,10 +160,19 @@ int main() {
 					cout<<"El nombre del juego no puede estar vacío"<<endl;
 					break;
 				}
+				//mostrarPartidas(nombreJuego);
 				try{
-					vector<Partida*> partidas = obtenerPartidas(nombreJuego, cantPartidas);
+					vector<Partida*> partidas = sistema->obtenerPartidas(nombreJuego, cantPartidas);
 					if(!partidas.empty()){
-						mostrarPartidas(partidas);
+						cout<<std::fixed<<std::setprecision(2);
+						for(Partida* partida : partidas){
+							cout<<"Duración 4: "<<partida->getDuracion()<<endl;
+							cout<<"Fecha 4: "<<partida->getFecha().presentate()<<endl;
+							cout<<"Entrando al mostrarPartidas"<<endl;
+							cout<<"---------------------------"<<endl;
+						}
+						sistema->mostrarPartidas(partidas);
+
 						for(auto partida : partidas) {
 							delete partida;
 						}
@@ -179,13 +189,13 @@ int main() {
 			case 6:{
 				try{
 					string nickname, videojuego;
-					float duracion = 0.0f;
+					double duracion;
 					char tipoPartida = '\0';
-					obtenerDatosP(nickname, videojuego, duracion, tipoPartida);
-					Partida* partida = crearPartida(tipoPartida);
+					sistema->obtenerDatosP(nickname, videojuego, duracion, tipoPartida);
+					Partida* partida = sistema->crearPartida(tipoPartida);
 					partida->setDuracion(duracion);
-					configPartida(partida);
-					iniciarPartida(nickname, videojuego, partida);
+					sistema->configPartida(partida);
+					sistema->iniciarPartida(nickname, videojuego, partida);
 					delete partida;
 				}catch(runtime_error& e){
 					cerr<<"Error: "<<e.what()<<endl;
