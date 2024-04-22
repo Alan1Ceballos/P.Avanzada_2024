@@ -135,12 +135,6 @@ vector<Partida*> Sistema::obtenerPartidas(string videojuego, int cantPartidas) {
 
     vector<Partida*> partidas = juego->getPartidas();
     cantPartidas = partidas.size();
-    for(Partida* partida : partidas){
-    	cout<<"Duración 3: "<<partida->getDuracion()<<endl;
-    	cout<<"Fecha 3: "<<partida->getFecha().presentate()<<endl;
-    	cout<<"Saliendo del obtnerPartidas"<<endl;
-    	cout<<"---------------------------"<<endl;
-    }
     return partidas;
 }
 
@@ -198,27 +192,21 @@ void Sistema::iniciarPartida(string nickname, string videojuego, Partida* datos)
     	throw runtime_error("No se encontró ningún juego con ese nombre");
     }
 
+    DtFechaHora fhActual = fhActual.obtenerFechaHoraActual();
+
     datos->setJugadorCreador(jugador);
-    datos->setFecha(DtFechaHora(18, 4, 2024, 18, 50));
+    datos->setFecha(fhActual);
     datos->setVideojuego(juego);
 
     if(PartidaIndividual* partidaIndividual = dynamic_cast<PartidaIndividual*>(datos)){
     	cout<<"Creando una partida individual..."<<endl;
     	juego->agregarPartida(partidaIndividual);
-    	cout<<"Duracion 1: "<<partidaIndividual->getDuracion()<<endl;
-    	cout<<"Fecha 1: "<<partidaIndividual->getFecha().presentate()<<endl;
-    	cout<<"Saliendo del iniciarPartida"<<endl;
-    	cout<<"---------------------------"<<endl;
     	juego->agregarJugador(jugador);
     	cout<<"Partida individual creada y jugador agregado al juego"<<endl;
     }
     else if(PartidaMultijugador* partidaMultijugador = dynamic_cast<PartidaMultijugador*>(datos)){
     	cout<<"Creando una partida multijugador..."<<endl;
     	juego->agregarPartida(partidaMultijugador);
-    	cout<<"Duracion 2: "<<partidaIndividual->getDuracion()<<endl;
-    	cout<<"Fecha 2: "<<partidaIndividual->getFecha().presentate()<<endl;
-    	cout<<"Saliendo del iniciarPartida"<<endl;
-    	cout<<"---------------------------"<<endl;
     	juego->agregarJugador(jugador);
     	cout<<"Partida multijugador creada y jugador agregado al juego"<<endl;
     }

@@ -59,6 +59,18 @@ string DtFechaHora::presentate(){
 	return dia + "/" + mes + "/" + anio + " - " + hora + ":" + minuto;
 }
 
+DtFechaHora DtFechaHora::obtenerFechaHoraActual(){
+	time_t tiempoActual = time(NULL);
+	tm *tmActual = localtime(&tiempoActual);
+	int anio = tmActual->tm_year + 1900;
+	int mes = tmActual->tm_mon + 1;
+	int dia = tmActual->tm_mday;
+	int hora = tmActual->tm_hour;
+	int minuto = tmActual->tm_min;
+
+	return DtFechaHora(dia, mes, anio, hora, minuto);
+}
+
 
 DtFechaHora::~DtFechaHora() {
 	// TODO Auto-generated destructor stub

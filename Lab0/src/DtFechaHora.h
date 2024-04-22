@@ -8,6 +8,7 @@
 #ifndef DTFECHAHORA_H_
 #define DTFECHAHORA_H_
 #include <string>
+#include <ctime>
 using namespace::std;
 
 class DtFechaHora {
@@ -23,6 +24,7 @@ public:
 	int getHora();
 	int getMinuto();
 	string presentate();
+	DtFechaHora obtenerFechaHoraActual();
 	virtual ~DtFechaHora();
 };
 

@@ -8,24 +8,22 @@
 
 #include <iostream>
 #include "Sistema.h"
-using namespace std;
+using namespace::std;
 int main() {
 	int oper;
 	Sistema* sistema = new Sistema;
-	/*agregarJugador("Player1", 25, "contrasenia1");
-	agregarJugador("Player2", 22, "contrasenia2");
-	agregarJugador("Player3", 21, "contrasenia3");
-	string nombre, genero;
-	nombre = "Call of Duty";
-	genero = "Shooter";
-	agregarVideojuego(nombre, genero);
-
+	/*sistema->agregarJugador("Player1", 25, "contrasenia1");
+	sistema->agregarJugador("Player2", 25, "contrasenia2");
+	sistema->agregarJugador("Player3", 25, "contrasenia3");
+	string nombre = "Call of Duty";
+	string genero = "Shooter";
+	sistema->agregarVideojuego(nombre, genero);
 	PartidaIndividual partida1;
 	DtFechaHora fechaHora1(2024, 4, 10, 15, 30);
 	partida1.setFecha(fechaHora1);
-	partida1.setDuracion(2.5);
+	partida1.setDuracion(6);
 	partida1.setContinuaPartidaAnterior(false);
-	callOfDuty.agregarPartida(&partida1);
+	sistema->encontrarJuego(nombre)->agregarPartida(&partida1);
 
 	PartidaIndividual partida2;
 	DtFechaHora fechaHora2(2024, 4, 11, 16, 0);
@@ -165,12 +163,6 @@ int main() {
 					vector<Partida*> partidas = sistema->obtenerPartidas(nombreJuego, cantPartidas);
 					if(!partidas.empty()){
 						cout<<std::fixed<<std::setprecision(2);
-						for(Partida* partida : partidas){
-							cout<<"Duración 4: "<<partida->getDuracion()<<endl;
-							cout<<"Fecha 4: "<<partida->getFecha().presentate()<<endl;
-							cout<<"Entrando al mostrarPartidas"<<endl;
-							cout<<"---------------------------"<<endl;
-						}
 						sistema->mostrarPartidas(partidas);
 
 						for(auto partida : partidas) {
