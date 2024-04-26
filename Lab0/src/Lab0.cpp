@@ -11,63 +11,7 @@
 using namespace::std;
 int main() {
 	int oper;
-	Sistema* sistema = new Sistema;
-	/*sistema->agregarJugador("Player1", 25, "contrasenia1");
-	sistema->agregarJugador("Player2", 25, "contrasenia2");
-	sistema->agregarJugador("Player3", 25, "contrasenia3");
-	string nombre = "Call of Duty";
-	string genero = "Shooter";
-	sistema->agregarVideojuego(nombre, genero);
-	PartidaIndividual partida1;
-	DtFechaHora fechaHora1(2024, 4, 10, 15, 30);
-	partida1.setFecha(fechaHora1);
-	partida1.setDuracion(6);
-	partida1.setContinuaPartidaAnterior(false);
-	sistema->encontrarJuego(nombre)->agregarPartida(&partida1);
-
-	PartidaIndividual partida2;
-	DtFechaHora fechaHora2(2024, 4, 11, 16, 0);
-	partida2.setFecha(fechaHora2);
-	partida2.setDuracion(1.75);
-	partida2.setContinuaPartidaAnterior(true);
-	callOfDuty->agregarPartida(&partida2);
-
-	PartidaIndividual partida3;
-	DtFechaHora fechaHora3(2024, 4, 12, 18, 45);
-	partida3.setFecha(fechaHora3);
-	partida3.setDuracion(3.0);
-	partida3.setContinuaPartidaAnterior(false);
-	callOfDuty->agregarPartida(&partida3);
-
-	PartidaMultijugador partida4;
-	DtFechaHora fechaHora(2024, 4, 15, 20, 0);
-	partida4.setFecha(fechaHora);
-	partida4.setDuracion(2.0);
-	partida4.setTransmitidaEnVivo(true);
-	Jugador jugador1("Player1", 25, "contrasenia1");
-	Jugador jugador2("Player2", 28, "contrasenia2");
-	partida4.unirseaPartida(&jugador1);
-	partida4.unirseaPartida(&jugador2);
-	callOfDuty->agregarPartida(&partida4);*/
-
-	/*cout<<  "-----------------------------------"<<endl;
-	cout<<  "-              MENU               -"<<endl;
-	cout<<  "-        1-INICIAR CON JUGADORES  -"<<endl;
-	cout<<  "-        2-INICIAR SIN JUGADORES  -"<<endl;
-	cout<<  "-----------------------------------"<<endl;
-	cin>>oper;
-	switch(oper)
-	{
-		case 1:
-			{
-				break;
-			}
-		default:
-			{
-				cout << "Iniciando sin jugadores";
-				break;
-			}
-	};*/
+	Sistema* sistema = new Sistema();
 	do {
 		cout<< 	"-----------------------------------------"<<endl;
 		cout<<	"-                                 	-"<<endl;
@@ -86,16 +30,31 @@ int main() {
 		{
 			case 1:{
 				try{
-					string nombre;
+					string nombre, contrasenia;
 					int edad;
-					string contrasenia;
+
 					cout<<"Ingrese el nickname: ";
 					cin.ignore();
 					getline(cin, nombre);
+
+					if(nombre.empty() || nombre.find_first_not_of(' ') == string::npos){
+						throw runtime_error("El nombre del jugador no puede estar vacío");
+					}
+
 					cout<<"Ingrese la edad: ";
 					cin>>edad;
+
+					if (cin.fail()) {
+					    throw runtime_error("La edad debe ser un número entero válido");
+					}
+
 					cout<<"Ingrese la contrasenia: ";
 					cin>>contrasenia;
+
+					if(contrasenia.empty() || contrasenia.find_first_not_of(' ') == string::npos){
+						throw runtime_error("La contrasenia del jugador no puede estar vacía");
+					}
+
 					sistema->agregarJugador(nombre, edad, contrasenia);
 				}
 				catch(runtime_error& e){
@@ -110,8 +69,18 @@ int main() {
 					cout<<"Ingrese el nombre del videojuego: ";
 					cin.ignore();
 					getline(cin, nombre);
+
+					if(nombre.empty() || nombre.find_first_not_of(' ') == string::npos){
+						throw runtime_error("El nombre del videojuego no puede estar vacío");
+					}
+
 					cout<<"Ingrese el género principal del videojuego: ";
 					getline(cin, genero);
+
+					if(genero.empty() || genero.find_first_not_of(' ') == string::npos){
+						throw runtime_error("El género del videojuego no puede estar vacío");
+					}
+
 					sistema->agregarVideojuego(nombre, genero);
 				}
 				catch(runtime_error& e){
@@ -125,9 +94,6 @@ int main() {
 					vector<Jugador*> jugadores = sistema->obtenerJugadores(cantJugadores);
 					cout<<"Jugadores registrados en el sistema: "<<endl;
 					sistema->mostrarJugadores(jugadores);
-					for(Jugador* jugador : jugadores){
-						delete jugador;
-					}
 				}
 				catch(runtime_error& e) {
 					cerr<<"Error: "<<e.what()<<endl;
@@ -139,43 +105,35 @@ int main() {
 					int cantVideojuegos = 0;
 					vector<Videojuego*> juegos = sistema->obtenerVideojuegos(cantVideojuegos);
 					sistema->mostrarVideojuegos(juegos);
-					for(auto juego : juegos){
-						delete juego;
-					}
 				}catch(runtime_error& e){
 					cerr<<"Error: "<<e.what()<<endl;
 				}
 				break;
 			}
 			case 5:{
-				string nombreJuego;
-				int cantPartidas = 0;
-				cout<<"Ingrese el nombre del juego: ";
-				cin.ignore();
-				getline(cin, nombreJuego);
-
-				if(nombreJuego.empty()){
-					cout<<"El nombre del juego no puede estar vacío"<<endl;
-					break;
-				}
-				//mostrarPartidas(nombreJuego);
 				try{
+					string nombreJuego;
+					int cantPartidas = 0;
+					cout<<"Ingrese el nombre del juego: ";
+					cin.ignore();
+					getline(cin, nombreJuego);
+
+					if(nombreJuego.empty() || nombreJuego.find_first_not_of(' ') == string::npos){
+						throw runtime_error("El nombre del juego no puede estar vacío");
+					}
+
 					vector<Partida*> partidas = sistema->obtenerPartidas(nombreJuego, cantPartidas);
 					if(!partidas.empty()){
 						cout<<std::fixed<<std::setprecision(2);
 						sistema->mostrarPartidas(partidas);
-
-						for(auto partida : partidas) {
-							delete partida;
-						}
 					}
 					else{
-						cout<<"No se encontraron partidas para el videojuego '"<<nombreJuego<<"'."<<endl;
+						throw runtime_error("No se encontraron partidas para el juego '" + nombreJuego + "'");
 					}
 				}
 				catch(runtime_error& e) {
-			        cerr<<"Error: "<<e.what()<<endl;
-			    }
+					cerr<<"Error: "<<e.what()<<endl;
+				}
 				break;
 			}
 			case 6:{
@@ -188,7 +146,6 @@ int main() {
 					partida->setDuracion(duracion);
 					sistema->configPartida(partida);
 					sistema->iniciarPartida(nickname, videojuego, partida);
-					delete partida;
 				}catch(runtime_error& e){
 					cerr<<"Error: "<<e.what()<<endl;
 				}

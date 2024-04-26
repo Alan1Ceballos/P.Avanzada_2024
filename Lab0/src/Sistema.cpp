@@ -82,7 +82,7 @@ vector<Videojuego*> Sistema::obtenerVideojuegos(int cantVideojuegos) {
 	vector<Videojuego*> listaVideojuegos;
 	for(int i = 0; i < cantVideojuegos; i++){
 		Videojuego* juegoActual = Juegos[i];
-		int totalHoras = 0;
+		double totalHoras = 0;
 		vector<Partida*> partidas = juegoActual->getPartidas();
 		int PS = partidas.size();
 		for (int j = 0; j < PS; j++) {
@@ -96,9 +96,12 @@ vector<Videojuego*> Sistema::obtenerVideojuegos(int cantVideojuegos) {
 		}
 
 		juegoActual->setTotalHorasDeJuego(totalHoras);
-		listaVideojuegos.push_back(juegoActual);
+		//string a = "cinco";
+		//string b = juegoActual->getNombre();
+		//if(b.length() >= a.length()){
+			listaVideojuegos.push_back(juegoActual);
+		//}
 	}
-
 	return listaVideojuegos;
 }
 
@@ -135,6 +138,12 @@ vector<Partida*> Sistema::obtenerPartidas(string videojuego, int cantPartidas) {
 
     vector<Partida*> partidas = juego->getPartidas();
     cantPartidas = partidas.size();
+    /*for(Partida* partida : partidas){
+    	cout<<"Duración 3: "<<partida->getDuracion()<<endl;
+    	cout<<"Fecha 3: "<<partida->getFecha().presentate()<<endl;
+    	cout<<"Saliendo del obtnerPartidas"<<endl;
+    	cout<<"---------------------------"<<endl;
+    }*/
     return partidas;
 }
 
@@ -147,6 +156,7 @@ void Sistema::mostrarPartidas(vector<Partida*> partidas){
 		}
 		cout<<"Partida "<<i + 1<<":"<<endl;
 		cout<<"Duración: "<<partida->getDuracion()<<" horas"<<endl;
+		cout<<"Fecha: "<<partida->getFecha().presentate()<<endl;
 
 		if(PartidaIndividual* partidaIndividual = dynamic_cast<PartidaIndividual*>(partida)){
 			cout<<"Tipo de partida: Individual"<<endl;
@@ -207,6 +217,10 @@ void Sistema::iniciarPartida(string nickname, string videojuego, Partida* datos)
     else if(PartidaMultijugador* partidaMultijugador = dynamic_cast<PartidaMultijugador*>(datos)){
     	cout<<"Creando una partida multijugador..."<<endl;
     	juego->agregarPartida(partidaMultijugador);
+    	cout<<"Duracion 2: "<<partidaIndividual->getDuracion()<<endl;
+    	cout<<"Fecha 2: "<<partidaIndividual->getFecha().presentate()<<endl;
+    	cout<<"Saliendo del iniciarPartida"<<endl;
+    	cout<<"---------------------------"<<endl;
     	juego->agregarJugador(jugador);
     	cout<<"Partida multijugador creada y jugador agregado al juego"<<endl;
     }
@@ -238,13 +252,32 @@ void Sistema::obtenerDatosP(string& nickname, string& videojuego, double& duraci
 	cout<<"Ingrese su nickname: ";
 	cin.ignore();
 	getline(cin, nickname);
+
+	if(nickname.empty() || nickname.find_first_not_of(' ') == string::npos){
+		throw runtime_error("El nickname no puede estar vacío");
+	}
+
 	cout<<"Ingrese el nombre del juego: ";
 	getline(cin, videojuego);
+
+	if(videojuego.empty() || videojuego.find_first_not_of(' ') == string::npos){
+		throw runtime_error("El nombre del videojuego no puede estar vacío");
+	}
+
 	cout<<"Ingrese la duracion de la partida (en horas, ej: 1.5 (hora y media)): ";
 	cin>>duracion;
+
+	if(duracion <= 0){
+		throw runtime_error("La duración debe ser un número positivo");
+	}
+
 	cout<<"¿La partida fue individual (i) o multijugador (m)?: ";
 	cin>>tipoPartida;
 	cin.ignore();
+
+	if((tipoPartida != 'i' && tipoPartida != 'I') && (tipoPartida != 'm' && tipoPartida != 'M')){
+		throw runtime_error("El tipo de partida seleccionado no es válido");
+	}
 }
 
 Partida* Sistema::crearPartida(char tipoPartida){
@@ -256,7 +289,7 @@ Partida* Sistema::crearPartida(char tipoPartida){
         partida = new PartidaMultijugador();
     }
     else{
-    	throw runtime_error("Opcion invalida");
+    	throw runtime_error("Opción de partida no válida");
     }
     return partida;
 }
