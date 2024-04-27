@@ -49,7 +49,8 @@ int main() {
 					}
 
 					cout<<"Ingrese la contrasenia: ";
-					cin>>contrasenia;
+					cin.ignore();
+					getline(cin, contrasenia);
 
 					if(contrasenia.empty() || contrasenia.find_first_not_of(' ') == string::npos){
 						throw runtime_error("La contrasenia del jugador no puede estar vacía");
@@ -74,6 +75,7 @@ int main() {
 					}
 
 					cout<<"Ingrese el género principal del videojuego: ";
+					cin.ignore();
 					getline(cin, genero);
 
 					if(genero.empty() || genero.find_first_not_of(' ') == string::npos){
