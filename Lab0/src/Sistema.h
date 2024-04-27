@@ -11,7 +11,6 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
-#include <iomanip>
 #include <vector>
 #include "Jugador.h"
 #include "Partida.h"
