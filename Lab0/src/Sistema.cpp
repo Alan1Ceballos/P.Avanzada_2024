@@ -138,12 +138,6 @@ vector<Partida*> Sistema::obtenerPartidas(string videojuego, int cantPartidas) {
 
     vector<Partida*> partidas = juego->getPartidas();
     cantPartidas = partidas.size();
-    /*for(Partida* partida : partidas){
-    	cout<<"Duración 3: "<<partida->getDuracion()<<endl;
-    	cout<<"Fecha 3: "<<partida->getFecha().presentate()<<endl;
-    	cout<<"Saliendo del obtnerPartidas"<<endl;
-    	cout<<"---------------------------"<<endl;
-    }*/
     return partidas;
 }
 
@@ -155,6 +149,7 @@ void Sistema::mostrarPartidas(vector<Partida*> partidas){
 			throw runtime_error("La partida es un puntero nulo");
 		}
 		cout<<"Partida "<<i + 1<<":"<<endl;
+		cout<<"Creador: "<<partida->getJugadorCreador()->getNickname()<<endl;
 		cout<<"Duración: "<<partida->getDuracion()<<" horas"<<endl;
 		cout<<"Fecha: "<<partida->getFecha().presentate()<<endl;
 
@@ -217,10 +212,6 @@ void Sistema::iniciarPartida(string nickname, string videojuego, Partida* datos)
     else if(PartidaMultijugador* partidaMultijugador = dynamic_cast<PartidaMultijugador*>(datos)){
     	cout<<"Creando una partida multijugador..."<<endl;
     	juego->agregarPartida(partidaMultijugador);
-    	cout<<"Duracion 2: "<<partidaIndividual->getDuracion()<<endl;
-    	cout<<"Fecha 2: "<<partidaIndividual->getFecha().presentate()<<endl;
-    	cout<<"Saliendo del iniciarPartida"<<endl;
-    	cout<<"---------------------------"<<endl;
     	juego->agregarJugador(jugador);
     	cout<<"Partida multijugador creada y jugador agregado al juego"<<endl;
     }

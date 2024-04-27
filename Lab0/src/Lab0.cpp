@@ -25,8 +25,8 @@ int main() {
 		cout<<  "-          7-SALIR			-"<<endl;
 		cout<<  "-                                 	-"<<endl;
 		cout<<  "-----------------------------------------"<<endl;
-		cin >> oper;
-		switch (oper)
+		cin>>oper;
+		switch(oper)
 		{
 			case 1:{
 				try{
@@ -64,8 +64,7 @@ int main() {
 			}
 			case 2:{
 				try{
-					string nombre;
-					string genero;
+					string nombre, genero;
 					cout<<"Ingrese el nombre del videojuego: ";
 					cin.ignore();
 					getline(cin, nombre);
