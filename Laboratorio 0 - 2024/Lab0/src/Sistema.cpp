@@ -249,7 +249,6 @@ void Sistema::obtenerDatosP(string& nickname, string& videojuego, double& duraci
 	}
 
 	cout<<"Ingrese el nombre del juego: ";
-	cin.ignore();
 	getline(cin, videojuego);
 
 	if(videojuego.empty() || videojuego.find_first_not_of(' ') == string::npos){
@@ -265,7 +264,6 @@ void Sistema::obtenerDatosP(string& nickname, string& videojuego, double& duraci
 
 	cout<<"¿La partida fue individual (i) o multijugador (m)?: ";
 	cin>>tipoPartida;
-	cin.ignore();
 
 	if((tipoPartida != 'i' && tipoPartida != 'I') && (tipoPartida != 'm' && tipoPartida != 'M')){
 		throw runtime_error("El tipo de partida seleccionado no es válido");
@@ -303,8 +301,7 @@ void Sistema::configPartida(Partida* partida){
         string nombreJugador;
         do{
             cout<<"Ingrese los nicknames de los demás jugadores ('Fin' para finalizar): ";
-            cin.ignore();
-            getline(cin, nombreJugador);
+            cin>>nombreJugador;
 
             if(nombreJugador.empty() || nombreJugador.find_first_not_of(' ') == string::npos){
             	throw runtime_error("El nombre del jugador no puede estar vacío");
@@ -320,7 +317,6 @@ void Sistema::configPartida(Partida* partida){
         }while(nombreJugador != "fin" && nombreJugador != "Fin");
     }
 }
-
 
 Sistema::~Sistema() {
 	// TODO Auto-generated destructor stub

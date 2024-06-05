@@ -156,7 +156,6 @@ int main() {
 				}
 
 				cout<<"Ingrese el género principal del videojuego: ";
-				cin.ignore();
 				getline(cin, genero);
 
 				if(genero.empty() || genero.find_first_not_of(' ') == string::npos){
