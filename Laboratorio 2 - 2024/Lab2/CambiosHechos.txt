@@ -1,0 +1,4 @@
+Se agregó una nueva relacion, donde una partida multijugador puede tener cualquier cantidad de comentarios
+Se agregó el atributo para la nueva categoria (Otro) en la clase Categoria; en consecuencia se alteró ligeramente el RNE
+Se agregaron atributos de precio en la clase Videojuego 
+Se cambio que, en lugar de tener dos atributos como fecha:DtFecha y hora:DtFecha en algunas clases, ahora estas sean un solo atributo, como por ejemplo en Partida, donde ahora es: fechaHoraInicio: DtFecha en lugar de ser dos atributos por separado
